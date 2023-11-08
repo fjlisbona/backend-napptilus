@@ -6,12 +6,4 @@ import java.util.Date;
 
 
 
-public record ProductRequest( Date applyDate,
-         Integer productId,
-
-         Integer chainId) {
-
-
-
-
-}
+public record ProductRequest( Date applyDate,Integer productId,Integer chainId) {}

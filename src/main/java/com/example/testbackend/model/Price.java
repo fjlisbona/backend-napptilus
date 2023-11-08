@@ -8,8 +8,9 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.EmbeddedId;
+import lombok.Data;
 
-
+@Data
 @Entity
 @Table(name = "PRICES")
 public class Price {
@@ -19,37 +20,7 @@ public class Price {
     private BigDecimal price;
     private String currency;
 
-    public PriceId getId() {
-        return id;
-    }
 
-    public void setId(PriceId id) {
-        this.id = id;
-    }
-
-    public Integer getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
-    public BigDecimal  getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal  price) {
-        this.price = price;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
 
 }
 
