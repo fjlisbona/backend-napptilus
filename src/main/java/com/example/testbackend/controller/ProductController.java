@@ -2,36 +2,38 @@ package com.example.testbackend.controller;
 
 import com.example.testbackend.model.Price;
 import com.example.testbackend.service.ProductService;
+
+import com.example.testbackend.util.DateMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 
 import java.text.ParseException;
 
-import java.text.SimpleDateFormat;
 
-import java.util.List;
+
+
 
 @RestController
+@RequestMapping("/api/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
-    @GetMapping(value = "/")
-    public List<Price> getAllTaxes(){
-        return  productService.getTaxes();
+
+    private  ProductService productService;
+
+    public ProductController(ProductService productService){
+        this.productService=productService;
     }
-
     @GetMapping(value = "/prices")
-    public ResponseEntity<ProductResponse> getTaxesByDateTime(@RequestParam("productId") Integer productId,@RequestParam("chainId")Integer chainId,@RequestParam("applyDate") String applyDate) throws ParseException {
+    public ResponseEntity<ProductResponse> getTaxesByDateTime(@RequestParam("productId") Integer productId, @RequestParam("chainId")Integer chainId, @RequestParam("applyDate") String applyDate ) throws ParseException {
+        // Use the DateMapper to parse the date string
+        // Assuming the DateMapper has a method like `parseDate`
+        // Adjust the method name accordingly to your implementation
 
-
-       SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");//"yyyy-MM-dd HH:mm:ss"
-
-        ProductResponse productResponse= productService.getPriceByDate(productId,chainId,originalFormat.parse(applyDate)).getBody();
-         return new ResponseEntity<ProductResponse>(productResponse, HttpStatus.OK);
+         return new ResponseEntity<ProductResponse>(productService.getPriceByDate(productId,chainId,applyDate), HttpStatus.OK);
 
     }
 }
